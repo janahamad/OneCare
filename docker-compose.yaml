@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  onecare:
+    build: .
+    container_name: onecare
+    restart: always
+    ports:
+      - "3018:80"                # OneCare web app
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - onecare_net
+    depends_on:
+      - onecare_db
+
+  onecare_db:
+    image: mysql:8.0
+    container_name: onecare_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: onecare_root_pass
+      MYSQL_DATABASE: onecare
+      MYSQL_USER: onecare_user
+      MYSQL_PASSWORD: onecare_pass
+    ports:
+      - "3313:3306"              # OneCare DB (optional exposure)
+    volumes:
+      - onecare_data:/var/lib/mysql
+    networks:
+      - onecare_net
+
+  onecare_phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: onecare_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: onecare_db
+      MYSQL_ROOT_PASSWORD: onecare_root_pass
+    ports:
+      - "8087:80"                # phpMyAdmin
+    networks:
+      - onecare_net
+
+networks:
+  onecare_net:
+    driver: bridge
+
+volumes:
+  onecare_data:
