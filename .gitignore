@@ -1,0 +1,14 @@
+.env
+node_modules/
+vendor/
+dist/
+build/
+*.log
+
+# Docker / runtime
+data/
+volumes/
+
+# OS / editor
+.DS_Store
+.vscode/
