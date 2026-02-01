@@ -31,7 +31,7 @@ services:
       MYSQL_USER: onecare_user
       MYSQL_PASSWORD: onecare_pass
     ports:
-      - "3313:3306"              # OneCare DB (optional exposure)
+      - "3313:3306"
     volumes:
       - onecare_data:/var/lib/mysql
     networks:
@@ -49,7 +49,7 @@ services:
       PMA_HOST: onecare_db
       MYSQL_ROOT_PASSWORD: onecare_root_pass
     ports:
-      - "8087:80"                # phpMyAdmin
+      - "8087:80"
     networks:
       - onecare_net
 
