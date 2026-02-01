@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
+    git \
+    curl \
     libzip-dev \
     libicu-dev \
     libjpeg-dev \
@@ -18,6 +20,9 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set Apache DocumentRoot to /public
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
