@@ -6,13 +6,20 @@ services:
     container_name: onecare
     restart: always
     ports:
-      - "3018:80"                # OneCare web app
+      - "3018:80"
     volumes:
       - ./:/var/www/html
+    environment:
+      - DB_HOST=onecare_db
+      - DB_PORT=3306
+      - DB_DATABASE=onecare
+      - DB_USERNAME=onecare_user
+      - DB_PASSWORD=onecare_pass
     networks:
       - onecare_net
     depends_on:
-      - onecare_db
+      onecare_db:
+        condition: service_healthy
 
   onecare_db:
     image: mysql:8.0
@@ -29,6 +36,10 @@ services:
       - onecare_data:/var/lib/mysql
     networks:
       - onecare_net
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   onecare_phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
