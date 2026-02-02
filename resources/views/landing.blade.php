@@ -24,7 +24,6 @@
                         رفيقك الأمثل <br><span style="color: var(--primary);">للجمال والعناية</span>
                     @else
                         Your Ultimate <br><span style="color: var(--primary);">Beauty & Care</span> Companion
-                    @else
                     @endif
                 </h1>
                 <p class="lead mb-5 text-dark-50" style="max-width: 550px; font-style: italic;">
