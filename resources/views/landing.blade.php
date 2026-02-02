@@ -1,41 +1,89 @@
 @extends('layouts.app')
 
+@php
+    $locale = session('locale', 'en');
+@endphp
+
 @section('content')
 <!-- Hero Section -->
-<section class="hero-section py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #fefae0 0%, #faedcd 100%); min-height: 80vh; display: flex; align-items: center;">
+<section class="hero-section position-relative vh-100 d-flex align-items-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: -1;">
+        <img src="{{ asset('images/hero-image.png') }}" alt="Hero" class="w-100 h-100 object-fit-cover" style="filter: brightness(0.85);">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(90deg, rgba(241, 239, 236, 0.9) 0%, rgba(241, 239, 236, 0.5) 50%, rgba(241, 239, 236, 0) 100%);"></div>
+    </div>
+
     <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <span class="badge bg-white text-primary px-3 py-2 rounded-pill mb-3 shadow-sm">{{ __('New Era of Wellness') }}</span>
-                <h1 class="display-3 fw-bold mb-4" style="color: #2b2d42;">
-                    Your Ultimate <span style="color: #d4a373;">Beauty & Care</span> Companion
+        <div class="row align-items-center">
+            <div class="col-lg-7 @if($locale === 'ar') text-end @endif">
+                <span class="text-uppercase tracking-wider mb-3 d-block" style="color: var(--primary); font-weight: 600; letter-spacing: 3px;">
+                    {{ $locale === 'ar' ? 'عهد جديد من الرعاية' : 'A New Era of Care' }}
+                </span>
+                <h1 class="display-2 mb-4">
+                    @if($locale === 'ar')
+                        رفيقك الأمثل <br><span style="color: var(--primary);">للجمال والعناية</span>
+                    @else
+                        Your Ultimate <br><span style="color: var(--primary);">Beauty & Care</span> Companion
+                    @else
+                    @endif
                 </h1>
-                <p class="lead mb-5 text-muted">
-                    Discover the best salons and wellness experts near you. Book appointments, manage your schedule, and treat yourself to the care you deserve.
+                <p class="lead mb-5 text-dark-50" style="max-width: 550px; font-style: italic;">
+                    {{ $locale === 'ar' ? 'اكتشف أفضل الصالونات وخبراء الصحة بالقرب منك. احجز مواعيدك، وامنح نفسك العناية التي تستحقها.' : 'Discover the best salons and wellness experts near you. Book appointments, and treat yourself to the care you deserve.' }}
                 </p>
-                <div class="d-flex gap-3">
-                    <a href="#explore" class="btn btn-primary btn-lg px-5 py-3 shadow-sm">
-                        {{ __('Get Started') }}
-                    </a>
-                    <a href="#" class="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill">
-                        {{ __('Learn More') }}
+                <div class="d-flex gap-3 @if($locale === 'ar') justify-content-start flex-row-reverse @endif">
+                    <a href="#services" class="btn btn-premium btn-lg">
+                        {{ $locale === 'ar' ? 'ابدأ الآن' : 'Get Started' }}
                     </a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="position-relative">
-                    <div class="bg-primary opacity-10 position-absolute rounded-circle" style="width: 500px; height: 500px; top: -50px; right: -50px; z-index: 0;"></div>
-                    <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&q=80&w=800" class="img-fluid rounded-4 shadow-lg position-relative" alt="Care Session" style="z-index: 1;">
-                    <div class="card border-0 shadow-lg position-absolute p-3 rounded-4 bg-white" style="bottom: -30px; left: -30px; z-index: 2; width: 200px;">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="bg-primary-subtle text-primary p-2 rounded-3">
-                                <i class="bi bi-star-fill fs-4"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-0 fw-bold">4.9/5</h6>
-                                <p class="small text-muted mb-0">User Rating</p>
-                            </div>
-                        </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-5" style="background-color: var(--bg-main);">
+    <div class="container py-5">
+        <div class="row mb-5 align-items-end">
+            <div class="col-md-6 @if($locale === 'ar') text-end @endif">
+                <h2 class="display-4">{{ $locale === 'ar' ? 'خِدْمَاتُنَا' : 'Our Services' }}</h2>
+                <div class="bg-primary mt-3" style="height: 4px; width: 60px; @if($locale === 'ar') float: right; @endif"></div>
+            </div>
+            <div class="col-md-6 text-md-end @if($locale === 'ar') text-md-start @endif">
+                <p class="text-muted italic mb-0">
+                    {{ $locale === 'ar' ? 'نقدم لك تجربة استثنائية من خلال خبراء عالميين.' : 'Experience excellence through our world-class professionals.' }}
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <!-- Service 1: Hair -->
+            <div class="col-md-6">
+                <div class="card border-0 bg-transparent overflow-hidden group">
+                    <div class="position-relative mb-4 overflow-hidden" style="height: 400px;">
+                        <img src="{{ asset('images/service-hair.jpg') }}" alt="Hair Services" class="w-100 h-100 object-fit-cover transition-transform" style="transition: transform 0.8s ease;">
+                    </div>
+                    <div class="@if($locale === 'ar') text-end @endif">
+                        <h3 class="h4 mb-2">{{ $locale === 'ar' ? 'خدمات الشعر' : 'Hair Artistry' }}</h3>
+                        <p class="text-muted">{{ $locale === 'ar' ? 'من القصات الكلاسيكية إلى أحدث صيحات الموضة.' : 'From classic cuts to high-fashion coloring and styling.' }}</p>
+                        <a href="#" class="text-dark text-decoration-none fw-bold border-bottom border-dark pb-1">
+                            {{ $locale === 'ar' ? 'استكشف المزيد' : 'Explore' }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Skincare -->
+            <div class="col-md-6">
+                <div class="card border-0 bg-transparent overflow-hidden group">
+                    <div class="position-relative mb-4 overflow-hidden" style="height: 400px;">
+                        <img src="{{ asset('images/service-skincare.jpg') }}" alt="Skincare" class="w-100 h-100 object-fit-cover transition-transform" style="transition: transform 0.8s ease;">
+                    </div>
+                    <div class="@if($locale === 'ar') text-end @endif">
+                        <h3 class="h4 mb-2">{{ $locale === 'ar' ? 'العناية بالبشرة' : 'Skin Renaissance' }}</h3>
+                        <p class="text-muted">{{ $locale === 'ar' ? 'استعادة نضارة بشرتك بأحدث التقنيات.' : 'Rejuvenate your natural glow with advanced facial treatments.' }}</p>
+                        <a href="#" class="text-dark text-decoration-none fw-bold border-bottom border-dark pb-1">
+                            {{ $locale === 'ar' ? 'استكشف المزيد' : 'Explore' }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -43,59 +91,32 @@
     </div>
 </section>
 
-<!-- Features Section -->
-<section id="explore" class="py-5 my-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">{{ __('Why Choose OneCare?') }}</h2>
-            <p class="text-muted mx-auto" style="max-width: 600px;">We bring convenience and quality together to ensure your experience is nothing short of exceptional.</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 text-center rounded-4 hover-lift">
-                    <div class="bg-primary text-white rounded-circle d-inline-flex mb-4 align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <i class="bi bi-search fs-4"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">{{ __('Easy Discovery') }}</h5>
-                    <p class="text-muted">Find the best beauty and wellness providers in your area with our curated list.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 text-center rounded-4 hover-lift">
-                    <div class="bg-primary text-white rounded-circle d-inline-flex mb-4 align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <i class="bi bi-calendar-check fs-4"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">{{ __('Instant Booking') }}</h5>
-                    <p class="text-muted">Real-time availability and instant confirmation for all your appointments.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 text-center rounded-4 hover-lift">
-                    <div class="bg-primary text-white rounded-circle d-inline-flex mb-4 align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                        <i class="bi bi-bell-fill fs-4"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">{{ __('Smart Reminders') }}</h5>
-                    <p class="text-muted">Never miss an appointment with automated SMS and email notifications.</p>
-                </div>
+<!-- Luxury Quote Section -->
+<section class="py-5" style="background-color: var(--bg-card);">
+    <div class="container py-5 text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <i class="bi bi-quote display-1" style="color: var(--accent); opacity: 0.3;"></i>
+                <h2 class="display-5 italic mb-4">
+                    {{ $locale === 'ar' ? '"الجمال لا يتعلق بالمظهر، بل يتعلق بالشعور الذي يمنحه لك."' : '"Beauty is not in the face; beauty is a light in the heart."' }}
+                </h2>
+                <p class="text-uppercase tracking-wider" style="color: var(--primary); font-weight: 600;">Khalil Gibran</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-5 mb-5">
-    <div class="container">
-        <div class="bg-dark text-white p-5 rounded-5 shadow-lg position-relative overflow-hidden">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <h2 class="display-5 fw-bold mb-3">{{ __('Are you a Salon Owner?') }}</h2>
-                    <p class="lead mb-4 text-white-50">Join hundreds of providers who trust OneCare to grow their business and manage bookings effortlessly.</p>
-                    <a href="/admin/register" class="btn btn-primary btn-lg px-5 shadow-sm">{{ __('List Your Business') }}</a>
-                </div>
-                <div class="col-lg-4 text-center d-none d-lg-block">
-                    <i class="bi bi-shop display-1 opacity-25"></i>
-                </div>
-            </div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="p-5 text-center" style="background-color: var(--accent); border-radius: 2px;">
+            <h2 class="display-4 mb-4 text-white">{{ $locale === 'ar' ? 'هل أنت صاحب صالون؟' : 'Are you a Salon Owner?' }}</h2>
+            <p class="lead mb-5 text-white-50 mx-auto" style="max-width: 600px;">
+                {{ $locale === 'ar' ? 'انضم إلى منصتنا وقم بإدارة حجوزاتك بسهولة واحترافية.' : 'Join our premium platform and manage your bookings with ease and professionalism.' }}
+            </p>
+            <a href="/admin/register" class="btn btn-light btn-lg px-5 py-3 rounded-0 fw-bold" style="color: var(--primary);">
+                {{ $locale === 'ar' ? 'سجل عملك اليوم' : 'Register Your Business' }}
+            </a>
         </div>
     </div>
 </section>
@@ -103,7 +124,14 @@
 
 @push('styles')
 <style>
-    .hover-lift { transition: transform 0.3s ease; }
-    .hover-lift:hover { transform: translateY(-10px); }
+    .group:hover img {
+        transform: scale(1.05);
+    }
+    .italic {
+        font-style: italic;
+    }
+    .tracking-wider {
+        letter-spacing: 0.1em;
+    }
 </style>
 @endpush
