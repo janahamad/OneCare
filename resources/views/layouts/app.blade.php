@@ -86,7 +86,7 @@
         }
 
         .footer {
-            background-color: var(--bg-card);
+            background-color: #1e1c1c;
             padding: 5rem 0 2rem;
             border-top: 1px solid var(--accent);
         }
@@ -164,7 +164,7 @@
 
     <footer class="footer mt-5">
         <div class="container text-center">
-            <img src="{{ asset('images/logo-dark.png') }}" alt="OneCare" class="mb-4" style="height: 60px; opacity: 0.9;">
+            <img src="{{ asset('images/logo-dark.png') }}" alt="OneCare" class="mb-4" style="height: 200px; opacity: 0.9;">
             <p class="text-muted mb-4 mx-auto" style="max-width: 600px;">
                 {{ $locale === 'ar' ? 'تبسيط حجوزات الجمال والعافية للجميع. ابحث عن خدماتك المفضلة واحجز فوراً.' : 'Simplifying beauty and wellness bookings for everyone. Find your favorite services and book instantly.' }}
             </p>
