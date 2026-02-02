@@ -51,7 +51,7 @@
         }
 
         .navbar-brand img {
-            height: 60px;
+            height: 200px;
         }
 
         .nav-link {
@@ -104,7 +104,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="OneCare">
+                <img src="{{ asset('images/logo.png') }}" alt="OneCare">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -164,7 +164,7 @@
 
     <footer class="footer mt-5">
         <div class="container text-center">
-            <img src="{{ asset('images/logo.jpeg') }}" alt="OneCare" class="mb-4" style="height: 30px; opacity: 0.7;">
+            <img src="{{ asset('images/logo-dark.png') }}" alt="OneCare" class="mb-4" style="height: 60px; opacity: 0.9;">
             <p class="text-muted mb-4 mx-auto" style="max-width: 600px;">
                 {{ $locale === 'ar' ? 'تبسيط حجوزات الجمال والعافية للجميع. ابحث عن خدماتك المفضلة واحجز فوراً.' : 'Simplifying beauty and wellness bookings for everyone. Find your favorite services and book instantly.' }}
             </p>
