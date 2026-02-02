@@ -44,7 +44,7 @@
     <div class="container py-5">
         <div class="row mb-5 align-items-end">
             <div class="col-md-6 @if($locale === 'ar') text-end @endif">
-                <h2 class="display-4">{{ $locale === 'ar' ? 'خِدْمَاتُنَا' : 'Our Services' }}</h2>
+                <h2 class="display-4">{{ $locale === 'ar' ? 'خدماتنا' : 'Our Services' }}</h2>
                 <div class="bg-primary mt-3" style="height: 4px; width: 60px; @if($locale === 'ar') float: right; @endif"></div>
             </div>
             <div class="col-md-6 text-md-end @if($locale === 'ar') text-md-start @endif">
