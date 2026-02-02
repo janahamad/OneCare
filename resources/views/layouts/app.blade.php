@@ -124,8 +124,34 @@
                         <a class="nav-link fw-bold" href="/lang/en">English</a>
                         @endif
                     </li>
-                    <li class="nav-item @if($dir === 'ltr') ms-lg-3 @else me-lg-3 @endif">
-                        <a href="/admin/login" class="btn btn-premium">{{ $locale === 'ar' ? 'دخول الشركاء' : 'Provider Login' }}</a>
+
+                    @guest
+                        <li class="nav-item @if($dir === 'ltr') ms-lg-3 @else me-lg-3 @endif">
+                            <a href="{{ route('login') }}" class="nav-link fw-bold">{{ $locale === 'ar' ? 'تسجيل الدخول' : 'Sign In' }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('register') }}" class="btn btn-premium">{{ $locale === 'ar' ? 'سجل الآن' : 'Sign Up' }}</a>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown @if($dir === 'ltr') ms-lg-3 @else me-lg-3 @endif">
+                            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-sm dropdown-menu-end" style="background-color: var(--bg-card);">
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item @if($dir === 'ar') text-end @endif">
+                                            {{ $locale === 'ar' ? 'تسجيل الخروج' : 'Logout' }}
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endguest
+
+                    <li class="nav-item border-start @if($dir === 'ltr') ps-lg-3 ms-lg-3 @else pe-lg-3 me-lg-3 @endif">
+                        <a href="/admin/login" class="nav-link small text-muted">{{ $locale === 'ar' ? 'دخول الشركاء' : 'Provider Login' }}</a>
                     </li>
                 </ul>
             </div>
